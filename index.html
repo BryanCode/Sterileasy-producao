@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Materiais Odontológicos</title>
+  <title>E-Commerce - Carrinho</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Georama:wght@400;600&display=swap" rel="stylesheet">
 
@@ -12,154 +13,385 @@
       font-family: 'Georama', sans-serif;
       padding: 20px;
       max-width: 1200px;
+      padding-bottom: 10em !important;
       margin: auto;
       background-color: #052637;
     }
+
     h1 {
-      margin-top: 50px;
       text-align: center;
       color: #6CB737;
+      margin-top: 50px;
     }
 
-    .material-form, .material-list {
+    h3 {
+      font-size: x-large;
+      margin: 5px 0;
+    }
+
+    h5 {
+      font-size: large;
+      margin: 5px 0;
+    }
+
+    #user-info {
+      text-align: right;
+      margin-top: -10px;
+      margin-bottom: 20px;
+    }
+
+    #user-info span {
+      font-size: 1rem;
+      color: #ddd;
+    }
+
+    #user-info button {
+      background-color: transparent;
+      color: #FFFFFF;
+      border: 1px solid transparent;
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+    }
+
+    #user-info button:hover {
+      color: red;
+      border: 1px solid red !important;
+    }
+
+
+
+    .material-list,
+    .cart-list {
       background-color: white;
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
     }
-    .material-form h2, .material-list h2 {
+
+    .material-list h2,
+    .cart-list h2 {
       margin-top: 0;
       color: #333;
     }
-    .material-form input, .material-form button {
-      display: block;
-      width: 90%;
-      margin: 10px 0;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .material-form button {
-      background-color: #6CB737;
-      color: white;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    .material-form button:hover {
-      background-color: #0056b3;
-    }
-    .material-list ul {
+
+    .material-list ul,
+    .cart-list ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
-    .material-list li {
+
+    .card {
+      list-style: none;
+      background-color: #fff;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      margin: 10px 0;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      background-color: #f9f9f9;
-    }
-    .material-list li img {
-      width: 50px;
-      margin-right: 10px;
-    }
-    .material-list button {
-      background-color: #ff5c5c;
-      border: none;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .material-list button:hover {
-      background-color: #e44b4b;
-    }
-    nav {
-      background-color: #6CB737;
-      padding: 10px;
-      color: white;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-    }
-    nav a {
-      text-decoration: none;
-      color: white;
-      font-size: 1.1rem;
-    }
-    nav a:hover {
-      text-decoration: underline;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .btn-add {
-      width: 100%;
-      font-size: 18px;
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+      border: solid 2px #6CB737;
+    }
+
+    .card-container {
+      align-items: center;
+      gap: 15px;
+    }
+
+    .card-image img {
+      width: 100% !important;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .card-image {
+      width: 100px;
+      margin-right: 30px;
+    }
+
+    .card-details {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      border: 1px solid #6CB737;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+
+      margin: 0 auto;
+      width: 50px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .card span {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #404B50;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .quantity-control button {
       background-color: #6CB737;
-      border: none;
       color: white;
+      border: none;
       padding: 5px 10px;
       border-radius: 5px;
+      font-size: 0.9rem;
       cursor: pointer;
-      margin-bottom: 1em;
+      transition: background-color 0.2s ease;
     }
-    
-    /* Modal Styles */
-    .modal {
-      display: none;
+
+    .quantity-control button:hover {
+      background-color: #0056b3;
+    }
+
+    .quantity-control input {
+      width: 50px;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      padding: 5px;
+      font-size: 1.2rem;
+    }
+
+    .add-to-cart {
+      background-color: #28a745 !important;
+      color: white;
+      border: none;
+      padding: 15px !important;
+      border-radius: 5px;
+      font-size: 1.3rem;
+      width: 100%;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .add-to-cart:hover {
+      background-color: #218838;
+
+    }
+
+    .add-to-cart i {
+      margin-right: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        max-width: 100%;
+      }
+
+      .card-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card-details {
+        align-items: center;
+        text-align: center;
+      }
+
+      .quantity-control {
+        justify-content: center;
+      }
+    }
+
+    .quantity-button {
+      background-color: transparent !important;
+      color: #6CB737 !important;
+      padding: 0;
+      font-size: 2em !important;
+
+    }
+
+    .material-list button,
+    .cart-list button {
+      background-color: #6CB737;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .material-list button:hover,
+    .cart-list button:hover {
+      background-color: #0056b3;
+    }
+
+    .cart-total {
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-align: right;
+      margin-top: 10px;
+    }
+
+
+    .checkout {
+      text-align: right;
+      margin-top: 0;
+    }
+
+    .checkout button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .checkout button:hover {
+      background-color: #218838;
+    }
+
+    .cart-list {
+
+      background-color: white;
+      padding: 20px;
+      margin: 0 auto;
+      border-top: 2px solid #ddd;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .cart-list h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .cart-list ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    .cart-list li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+
+
+    .cart-container {
+      position: fixed;
+      bottom: 0;
+      right: 20% !important;
+      width: 100%;
+      max-width: 400px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease-in-out;
+      background-color: #f9f9f9;
+      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .cart-container.active {
+      transform: translateY(0);
+    }
+
+    .cart-toggle-button {
+      position: fixed;
+      bottom: 10px;
+      right: 20px;
+      background-color: #6CB737;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .cart-toggle-button i {
+      margin-right: 5px;
+    }
+
+    .cart-toggle-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Adicione este código no corpo da sua página -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+
+  <style>
+    #loading-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background-color: rgba(255, 255, 255, 0.8);
+      display: flex;
       justify-content: center;
       align-items: center;
       z-index: 2000;
+      display: none;
+      /* Inicialmente oculto */
     }
-    .modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 5px;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      text-align: center;
+
+    .spinner {
+      border: 5px solid #f3f3f3;
+      /* Cor de fundo do spinner */
+      border-top: 5px solid #6CB737;
+      /* Cor principal */
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
     }
-    .modal-content input {
-      margin: 10px 0;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .modal-content button {
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #6CB737;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .modal-content button:hover {
-      background-color: #0056b3;
-    }
-    .modal-close {
-      background-color: #ff5c5c;
-      margin-top: 10px;
-    }
-    .modal-close:hover {
-      background-color: #e44b4b;
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
 
@@ -170,11 +402,11 @@
       position: fixed;
       top: 0;
       left: -250px;
-      background-color:  #404B50;
+      background-color: #404B50;
       overflow-x: hidden;
       transition: 0.3s;
       padding-top: 20px;
-      z-index: 1000;
+      z-index: 1000000;
     }
 
     #sidebar a {
@@ -200,7 +432,7 @@
       position: fixed;
       top: 15px;
       left: 15px;
-      color: #ccc;
+      color: #FFFFFF;
       cursor: pointer;
       transition: 0.3s;
     }
@@ -223,172 +455,88 @@
     .menu-open .content {
       margin-left: 250px;
     }
+
+    @media screen and (max-width: 768px) {
+      .cart-total {
+        font-size: .9em;
+      }
+
+      .cart-container.active {
+      transform: translate(20%,-60px);
+    }
+
+
+      .cart-container {
+        bottom: 0;
+        width: 100%;
+        max-width: 400px;
+        transform: translateY(100%);
+        transition: transform 0.3s ease-in-out;
+        background-color: #f9f9f9;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .card-material {
+        flex-direction: column;
+      }
+
+      h5 {
+        margin-top: 0;
+      }
+
+      .card-details h3 {
+        text-align: center;
+      }
+
+      .price {
+        font-size: xx-large;
+        margin: 0;
+      }
+
+      .card-image {
+        margin: 0;
+      }
+    }
   </style>
-</head>
-<body>
 
-  <!-- Adicione este código no corpo da sua página -->
-<div id="loading-overlay">
-  <div class="spinner"></div>
-</div>
 
-<style>
-  #loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    display: none; /* Inicialmente oculto */
-  }
-  .spinner {
-    border: 5px solid #f3f3f3; /* Cor de fundo do spinner */
-    border-top: 5px solid #6CB737; /* Cor principal */
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-  }
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-      /* Modal Styles */
-      .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
 
-    .modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      text-align: center;
-    }
+  <h1>Faça seu pedido</h1>
 
-    .modal-content input {
-      margin: 10px 0;
-      padding: 10px;
-      width: 90%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .modal-content button {
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #6CB737;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    .modal-content button:hover {
-      background-color: #0056b3;
-    }
-
-    .modal-close {
-      background-color: #ff5c5c;
-      margin-top: 10px;
-    }
-
-    .modal-close:hover {
-      background-color: #e44b4b;
-    }
-</style>
-
-  <!-- Botão de Menu -->
-  <div id="menu-toggle">
-    <i class="fa fa-bars"></i>
+  <div id="user-info">
+    <!-- Nome do cliente ou botão de login será exibido aqui -->
   </div>
 
-  <!-- Menu Lateral -->
-  <div id="sidebar">
-    <a href="index.html"><i class="fa fa-user-shield"></i> Admin</a>
-    <a href="registration.html"><i class="fa fa-user-plus"></i> Registro</a>
-    <a href="login.html"><i class="fa fa-sign-in"></i> Login</a>
-    <a href="store.html"><i class="fa fa-store"></i> Loja</a>
-    <a href="pedidos.html"><i class="fa fa-briefcase"></i> pedidos</a>
-  </div>
-
-
-  <h1>Materiais Odontológicos</h1>
-
-  <button class="btn btn-add" onclick="abrirModalAdicionar()">Adicionar Material</button>
-
-
-  
   <div class="material-list">
-    <h2>Lista de Materiais</h2>
-    <ul id="material-list"></ul>
+    <h2>Itens Disponíveis</h2>
+    <ul id="material-list" style=" flex-wrap: wrap; width: 100%;" class="card-container"></ul>
   </div>
+  <button id="toggle-cart" class="cart-toggle-button"><i class="fas fa-shopping-cart"></i> Carrinho</button>
 
-    <!-- Modal para Adicionar Material -->
-    <div id="modal-adicionar" class="modal">
-      <div class="modal-content">
-        <h2>Adicionar Material</h2>
-        <input type="text" id="nome" placeholder="Nome do Material" required>
-        <input type="text" id="descricao" placeholder="Descrição do Material">
-        <input type="number" id="valor" placeholder="Valor do Material" required>
-        <button onclick="adicionarMaterial()">Adicionar</button>
-        <button class="modal-close" onclick="fecharModalAdicionar()">Cancelar</button>
+  <div class="cart-container">
+
+    <div class="cart-list">
+      <ul id="cart-list"></ul>
+      <div class="checkout" style="justify-content: flex-end; gap: 35px; align-items: center;">
+        <p class="cart-total" id="cart-total">Total: R$ 0.00</p>
+        <button onclick="enviarPedido()">Finalizar</button>
       </div>
     </div>
-  
-
-  <!-- Modal para Editar Material -->
-  <div id="modal-editar" class="modal">
-    <div class="modal-content">
-      <h2>Editar Material</h2>
-      <input type="text" id="editar-nome" placeholder="Nome do Material">
-      <input type="text" id="editar-descricao" placeholder="Descrição do Material">
-      <input type="number" id="editar-valor" placeholder="Valor do Material">
-      <button onclick="salvarEdicao()">Salvar</button>
-      <button class="modal-close" onclick="fecharModal()">Cancelar</button>
-    </div>
   </div>
-  <script>
-     function abrirModalAdicionar() {
-      document.getElementById('modal-adicionar').style.display = 'flex';
-    }
 
-    function fecharModalAdicionar() {
-      document.getElementById('modal-adicionar').style.display = 'none';
-    }
 
-    document.getElementById('menu-toggle').addEventListener('mouseenter', function () {
-      document.body.classList.toggle('menu-open');
-    });
-    
-    document.getElementById('menu-toggle').addEventListener('click', function () {
-      document.body.classList.toggle('menu-open');
-    });
-    
-  
-    document.getElementById('sidebar').addEventListener('mouseleave', function () {
-      document.body.classList.toggle('menu-open');
-    }); 
-  </script>
   <script>
+
+    const toggleButton = document.getElementById('toggle-cart');
+    const cartContainer = document.querySelector('.cart-container');
+
+    toggleButton.addEventListener('click', () => {
+      cartContainer.classList.toggle('active'); // Alterna a classe que exibe/oculta o carrinho
+    });
+
     const databaseURL = "https://sterileasy-ca5ed-default-rtdb.firebaseio.com/materiais.json";
-    let idMaterialEdicao = null;
+    const pedidosURL = "https://sterileasy-ca5ed-default-rtdb.firebaseio.com/pedidos.json";
 
     // Função para exibir o overlay de loading
     function mostrarLoading() {
@@ -400,36 +548,27 @@
       document.getElementById('loading-overlay').style.display = 'none';
     }
 
-    // Função para adicionar material
-    async function adicionarMaterial() {
-      const nome = document.getElementById('nome').value;
-      const valor = document.getElementById('valor').value;
-      const descricao = document.getElementById('descricao').value;
-      if (nome && valor) {
-        await fetch(databaseURL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nome, valor, descricao})
-        });
-        fecharModalAdicionar();
-        location.reload();
+    // Função para exibir o nome do cliente ou botão de login
+    function exibirUsuario() {
+      const cliente = JSON.parse(localStorage.getItem('cliente'));
+
+      const userInfoDiv = document.getElementById('user-info');
+      if (cliente && cliente.nome) {
+        userInfoDiv.innerHTML = `
+        <div style="display: flex; align-items: flex-end; flex-direction: column;">  
+          <span>Bem-vindo, ${cliente.nome}!</span>
+          <button class=" btn-danger" onclick="Logout()">Sair</button>
+        </div>`;
       } else {
-        alert('Preencha todos os campos!');
+        userInfoDiv.innerHTML = `<button class="background-color: #6CB737 !important;  " onclick="window.location.href='login.html'">Logar</button>`;
       }
     }
 
-    // Função para excluir material
-    async function excluirMaterial(id) {
-      const url = `https://sterileasy-ca5ed-default-rtdb.firebaseio.com/materiais/${id}.json`;
-
-      await fetch(url, {
-        method: "DELETE"
-      });
-
-      listarMateriais();
+    function Logout() {
+      localStorage.removeItem('cliente');
+      location.reload();
     }
 
-    // Função para listar os materiais
     async function listarMateriais() {
       const response = await fetch(databaseURL);
       const data = await response.json();
@@ -442,70 +581,165 @@
           const material = data[id];
 
           const li = document.createElement('li');
+          li.classList.add('card');
           li.innerHTML = `
-            <div style="display: flex; align-items: center;">
-              <img src="assets/dentista.png" alt="${material.nome}"> <br>
-              <span style="font-size: 14px;">${material.nome} <br>
-                <strong>R$ ${material.valor}</strong></span>
-            </div>
-            <div style="display: flex; gap: 10px; align-items: center;">
-              <button style="background-color: green !important;" onclick="abrirModal('${id}', '${encodeURIComponent(JSON.stringify(material))}')">Editar</button>
-              <button onclick="excluirMaterial('${id}')">Excluir</button>
-            </div>
-          `;
-
+      <div class="card-material" style="display: flex; align-items: center; justify-content: center;">
+        <div class="card-image">
+          <img src="assets/dentista.png" alt="${material.nome}" id="myImage">
+        </div>
+        <div class="card-details">
+          <h3>${material.nome}</h3>
+          <h5>${material.descricao || ''}</h5>
+          <p class="price">R$ ${material.valor}</p>
+          <div class="quantity-control">
+            <p>Quantidade:</p>
+            <button style="font-size: 2.3em !important; transform: translateY(-3px);" class="quantity-button" onclick="decrementarQuantidade('${id}')">-</button>
+            <input style="display:flex; align-items: center; justify-content: center; transform: translateX(10px);" type="number" id="quantidade-${id}" value="1" min="1" max="100">
+            <button class="quantity-button" onclick="incrementarQuantidade('${id}')">+</button>
+          </div>
+          <button class="add-to-cart" onclick="adicionarAoCarrinho('${id}', '${encodeURIComponent(JSON.stringify(material))}')">
+            <i class="fas fa-shopping-cart"></i> Adicionar ao Pedido
+          </button>
+        </div>
+      </div>
+    `;
           materiaisLista.appendChild(li);
         });
       }
 
       esconderLoading();
+
+
     }
 
-    // Função para abrir o modal e carregar dados do material
-    function abrirModal(id, materialString) {
-      idMaterialEdicao = id;
+    function incrementarQuantidade(id) {
+      const input = document.getElementById(`quantidade-${id}`);
+      input.value = parseInt(input.value) + 1;
+
+      if (cartContainer.classList.contains('active')) {
+        listarCarrinho(); // Chama a função para atualizar o carrinho
+        return;
+      }
+      cartContainer.classList.toggle('active'); // Alterna a classe que exibe/oculta o carrinho
+    }
+
+    function decrementarQuantidade(id) {
+      const input = document.getElementById(`quantidade-${id}`);
+      if (parseInt(input.value) > 1) {
+        input.value = parseInt(input.value) - 1;
+      }
+      if (cartContainer.classList.contains('active')) {
+        listarCarrinho(); // Chama a função para atualizar o carrinho
+        return;
+      }
+      cartContainer.classList.toggle('active'); // Alterna a classe que exibe/oculta o carrinho
+    }
+
+    function adicionarAoCarrinho(id, materialString) {
       const material = JSON.parse(decodeURIComponent(materialString));
-      
-      document.getElementById('editar-nome').value = material.nome;
-      document.getElementById('editar-descricao').value = material.descricao;
-      document.getElementById('editar-valor').value = material.valor;
-      document.getElementById('modal-editar').style.display = 'flex';
+      const quantidade = parseInt(document.getElementById(`quantidade-${id}`).value);
+
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      const itemExistente = carrinho.find((item) => item.id === id);
+
+      if (itemExistente) {
+        itemExistente.quantidade += quantidade;
+      } else {
+        carrinho.push({ id, ...material, quantidade });
+      }
+      if (cartContainer.classList.contains('active')) {
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+        listarCarrinho(); // Chama a função para atualizar o carrinho
+        return;
+      }
+      cartContainer.classList.toggle('active'); // Alterna a classe que exibe/oculta o carrinho
+      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+      listarCarrinho();
     }
 
-    // Função para fechar o modal
-    function fecharModal() {
-      document.getElementById('modal-editar').style.display = 'none';
-      idMaterialEdicao = null;
-    }
+    function listarCarrinho() {
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      const cartLista = document.getElementById('cart-list');
+      cartLista.innerHTML = '';
 
-    // Função para salvar as edições
-    async function salvarEdicao() {
-      const nome = document.getElementById('editar-nome').value;
-      const valor = document.getElementById('editar-valor').value;
-      const descricao = document.getElementById('editar-descricao').value;
+      if (carrinho.length > 0) {
+        carrinho.forEach((item) => {
+          const li = document.createElement('li');
 
-      if (nome && valor && idMaterialEdicao) {
-        const url = `https://sterileasy-ca5ed-default-rtdb.firebaseio.com/materiais/${idMaterialEdicao}.json`;
-        const materialAtualizado = { nome, valor, descricao };
-
-        await fetch(url, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(materialAtualizado)
+          li.innerHTML = `
+            
+              <span style="display: flex; align-items: center;justify-content: space-between;">${item.nome} (x${item.quantidade})</span>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <span>R$ ${(item.valor * item.quantidade).toFixed(2)}</span>
+                <button style="background-color:red;" onclick="removerDoCarrinho('${item.id}')"><i class="fas fa-trash"></i></button>
+              </div>    
+              `;
+          cartLista.appendChild(li);
         });
 
-        fecharModal();
-        listarMateriais();
       } else {
-        alert('Preencha todos os campos!');
+        cartLista.innerHTML = '<li>Carrinho vazio</li>';
       }
+
+      calcularTotal();
     }
+
+    function calcularTotal() {
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      const total = carrinho.reduce((acc, item) => acc + item.valor * item.quantidade, 0);
+      document.getElementById('cart-total').textContent = `Total: R$ ${total.toFixed(2)}`;
+    }
+
+    function removerDoCarrinho(id) {
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      carrinho = carrinho.filter((item) => item.id !== id);
+      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+      listarCarrinho();
+    }
+
+    async function enviarPedido() {
+      mostrarLoading()
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      const cliente = JSON.parse(localStorage.getItem('cliente'));
+
+      if (!cliente) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      if (carrinho.length === 0) {
+        alert('O carrinho está vazio!');
+        return;
+      }
+
+      const total = carrinho.reduce((acc, item) => acc + item.valor * item.quantidade, 0);
+      const pedido = {
+        cliente: cliente,
+        status: 'pendente',
+        itens: carrinho,
+        total,
+        data: new Date().toISOString()
+      };
+
+      await fetch(pedidosURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pedido)
+      });
+
+      alert('Pedido enviado com sucesso!');
+      esconderLoading()
+      localStorage.removeItem('carrinho');
+      listarCarrinho();
+    }
+
     mostrarLoading()
-    // Inicializa a lista ao carregar a página
+    exibirUsuario();
     listarMateriais();
+    listarCarrinho();
   </script>
 
 </body>
+
 </html>
