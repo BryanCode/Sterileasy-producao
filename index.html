@@ -12,8 +12,8 @@
 
   <style>
     body {
+      padding-top: 20px;
       font-family: 'Georama', sans-serif;
-      padding: 20px;
       max-width: 1200px;
       padding-bottom: 10em !important;
       margin: auto;
@@ -25,7 +25,6 @@
     h1 {
       text-align: center;
       color: #6CB737;
-      margin-top: 50px;
     }
 
     h3 {
@@ -41,6 +40,7 @@
     #user-info {
       text-align: right;
       margin-top: -10px;
+      margin-right: 10px;
       margin-bottom: 20px;
     }
 
@@ -69,7 +69,7 @@
 
     .material-list,
     .cart-list {
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.952);
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -94,7 +94,7 @@
       background-color: #fff;
       border: 2px solid #ddd;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.224);
       padding: 15px;
       margin: 10px 0;
       display: flex;
@@ -208,6 +208,11 @@
     @media (max-width: 768px) {
       .card {
         max-width: 100%;
+      }
+
+      .logo img {
+        margin-left: 10px;
+        max-width: 70px;
       }
 
       .card-container {
@@ -352,8 +357,8 @@
     .cart-toggle-button:hover {
       background-color: #0056b3;
     }
-  
-  
+
+
     #loading-overlay {
       position: fixed;
       top: 0;
@@ -457,16 +462,17 @@
         font-size: .9em;
       }
 
-       h3 {
-        font-size: 1.1em !important;  
-       }
-        h5{
+      h3 {
+        font-size: 1.1em !important;
+      }
+
+      h5 {
         font-size: .9em !important;
       }
 
       .cart-container.active {
-      transform: translate(20%,-60px);
-      max-width: 400px;
+        transform: translate(20%, -60px);
+        max-width: 400px;
       }
 
       .material-name {
@@ -477,9 +483,9 @@
         bottom: 0;
         width: 100%;
         max-width: 400px;
-        
 
-        transform: translate(20% ,100%);
+
+        transform: translate(20%, 100%);
         transition: transform 0.3s ease-in-out;
         background-color: #f9f9f9;
         border-top-left-radius: 10px;
@@ -509,81 +515,84 @@
         justify-content: center;
       }
     }
-      /* Overlay cobrindo toda a tela */
-  #checkout-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  }
 
-  /* Contêiner do Checkout */
-  .checkout-container {
-    background-color: white;
-    width: 90%;
-    max-width: 600px;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
+    /* Overlay cobrindo toda a tela */
+    #checkout-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
 
-  .checkout-container h1 {
-    margin-bottom: 20px;
-    color: #333;
-  }
+    /* Contêiner do Checkout */
+    .checkout-container {
+      background-color: white;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
 
-  /* Tabela de produtos */
-  .checkout-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
+    .checkout-container h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
 
-  .checkout-table th, .checkout-table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: center;
-  }
+    /* Tabela de produtos */
+    .checkout-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
 
-  .checkout-table th {
-    background-color: #f5f5f5;
-    color: #333;
-  }
+    .checkout-table th,
+    .checkout-table td {
+      padding: 10px;
+      text-align: left !important;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
 
-  .checkout-footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-  }
+    .checkout-table th {
+      background-color: #f5f5f5;
+      color: #333;
+    }
 
-  .checkout-footer p {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
+    .checkout-footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-  .checkout-footer button {
-    padding: 10px 20px;
-    background-color: #6DB734;
-    border: none;
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+    .checkout-footer p {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
 
-  .checkout-footer button:hover {
-    background-color: #0056b3;
-  }
+    .checkout-footer button {
+      padding: 10px 20px;
+      background-color: #6DB734;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .checkout-footer button:hover {
+      background-color: #0056b3;
+    }
   </style>
 
 
@@ -591,25 +600,27 @@
 
 <body>
 
+
+
   <!-- Menu de Navegação Inferior -->
-<nav class="bottom-nav">
-  <a href="index.html" class="nav-item" style="color: #218838;">
-    <i class="fa fa-store" ></i>
-    <span>Loja</span>
-  </a>
-  <a href="#" class="nav-item" onclick="abrirPedidos()">
-    <i class="fa fa-clipboard-list"></i>
-    <span>Pedidos</span>
-  </a>
-  <a href="#" class="nav-item" id="toggle-cart">
-    <i class="fa fa-shopping-cart"></i>
-    <span>Carrinho</span>
-  </a>
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item" style="color: #218838;">
+      <i class="fa fa-store"></i>
+      <span>Loja</span>
+    </a>
+    <a href="#" class="nav-item" onclick="abrirPedidos()">
+      <i class="fa fa-clipboard-list"></i>
+      <span>Pedidos</span>
+    </a>
+    <a href="#" class="nav-item" id="toggle-cart">
+      <i class="fa fa-shopping-cart"></i>
+      <span>Carrinho</span>
+    </a>
 
-</nav>
+  </nav>
 
 
-  <!-- Checkout Overlay -->
+
   <div id="checkout-overlay" style="display: none;">
     <div class="checkout-container">
       <h1>Checkout</h1>
@@ -628,24 +639,25 @@
       <div class="checkout-footer">
         <p id="checkout-total">Total: R$ 0.00</p>
         <div>
-        <button onclick="fecharCheckout()">Fechar</button>
-        <button onclick="enviarPedido()">Finalizar</button>
-      </div>
+          <button onclick="fecharCheckout()">Fechar</button>
+          <button onclick="enviarPedido()">Finalizar</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Adicione este código no corpo da sua página -->
   <div id="loading-overlay">
     <div class="spinner"></div>
   </div>
+
+
   <div id="user-info">
     <!-- Nome do cliente ou botão de login será exibido aqui -->
-    </div>
+  </div>
+
+
 
   <h1>Faça seu pedido</h1>
-
-
 
   <div class="material-list">
     <h2>Itens Disponíveis</h2>
@@ -663,9 +675,9 @@
         <p class="cart-total" id="cart-total">Total: R$ 0.00</p>
         <button onclick="abrirCheckout()">Finalizar</button>
       </div>
-    
+
     </div>
-  
+
   </div>
 
   <script>
@@ -684,78 +696,78 @@
       }
       lastTouchTime = currentTime;
     });
-   
+
     const toggleButton = document.getElementById('toggle-cart');
     toggleButton.addEventListener('click', () => {
-          cartContainer.classList.toggle('active'); // Alterna a classe que exibe/oculta o carrinho
-          if (cartContainer.classList.contains('active')) {
-            toggleButton.innerHTML = '<i class="fas fa-times"></i> Fechar Carrinho';
-            toggleButton.style.color = 'red';
-          } else {
-            toggleButton.innerHTML = '<i class="fas fa-shopping-cart"></i> Carrinho';
-            toggleButton.style.color = 'white';
-          }
+      cartContainer.classList.toggle('active'); // Alterna a classe que exibe/oculta o carrinho
+      if (cartContainer.classList.contains('active')) {
+        toggleButton.innerHTML = '<i class="fas fa-times"></i> Fechar Carrinho';
+        toggleButton.style.color = 'red';
+      } else {
+        toggleButton.innerHTML = '<i class="fas fa-shopping-cart"></i> Carrinho';
+        toggleButton.style.color = 'white';
+      }
 
-        });
+    });
     const cartContainer = document.querySelector('.cart-container');
     const databaseURL = "https://sterileasy-ca5ed-default-rtdb.firebaseio.com/materiais.json";
     const pedidosURL = "https://sterileasy-ca5ed-default-rtdb.firebaseio.com/pedidos.json";
     const incrementURL = 'https://sterileasy-ca5ed-default-rtdb.firebaseio.com/pedidos/increment.json'
 
     async function enviarPedido() {
-        fecharCheckout();
-        mostrarLoading()
-        const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-        const cliente = JSON.parse(localStorage.getItem('cliente'));
+      fecharCheckout();
+      mostrarLoading()
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      const cliente = JSON.parse(localStorage.getItem('cliente'));
 
 
-        if (!cliente) {
-          window.location.href = 'login.html';
-          esconderLoading() 
-          return;
-        }
-
-        if (carrinho.length === 0) {
-          alert('O carrinho está vazio!');
-          esconderLoading()
-          return;
-        }
-
-        const response = await fetch(incrementURL);
-        const NumPedido = await response.json();
-        const total = carrinho.reduce((acc, item) => acc + item.valor * item.quantidade, 0);
-
-        const pedido = {
-          idPedido: NumPedido,
-          cliente: cliente,
-          status: 'pendente',
-          itens: carrinho,
-          total,
-          data: new Date().toISOString()
-        };
-
-        
-
-        await fetch(pedidosURL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },  
-          body: JSON.stringify(pedido)
-        });
-
-        await fetch(incrementURL, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },  
-          body: JSON.stringify( NumPedido + 1 )
-        });
-        
-
-        alert('Pedido enviado com sucesso!');
-        cartContainer.classList.toggle('active');
+      if (!cliente) {
+        window.location.href = 'login.html';
         esconderLoading()
-        localStorage.removeItem('carrinho');
-        listarCarrinho();
-        direcionarWhatsapp(NumPedido, cliente);
+        return;
       }
+
+      if (carrinho.length === 0) {
+        alert('O carrinho está vazio!');
+        esconderLoading()
+        return;
+      }
+
+      const response = await fetch(incrementURL);
+      const NumPedido = await response.json();
+      const total = carrinho.reduce((acc, item) => acc + item.valor * item.quantidade, 0);
+
+      const pedido = {
+        idPedido: NumPedido,
+        cliente: cliente,
+        status: 'pendente',
+        itens: carrinho,
+        total,
+        data: new Date().toISOString()
+      };
+
+
+
+      await fetch(pedidosURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pedido)
+      });
+
+      await fetch(incrementURL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(NumPedido + 1)
+      });
+
+
+      alert('Pedido enviado com sucesso!');
+      cartContainer.classList.toggle('active');
+      esconderLoading()
+      localStorage.removeItem('carrinho');
+      listarCarrinho();
+      direcionarWhatsapp(NumPedido, cliente);
+    }
 
     function direcionarWhatsapp(idPedido, cliente) {
       const numero = '555189580108';
@@ -818,12 +830,29 @@
       const userInfoDiv = document.getElementById('user-info');
       if (cliente && cliente.nome) {
         userInfoDiv.innerHTML = `
-        <div style="display: flex; align-items: flex-end; flex-direction: column;">  
-          <span>Bem-vindo, ${cliente.nome}!</span>
-          <button class=" btn-danger" onclick="Logout()">Sair</button>
-        </div>`;
+         <div style="display: flex; align-items: flex-end; justify-content: space-between;"> 
+
+          <div class="logo" style="display: flex; align-items: center;">
+            <img src="android/logo to pwa.png">
+          </div>
+
+          <div style="display: flex; align-items: flex-end; flex-direction: column;">  
+            <span>Bem-vindo, ${cliente.nome}!</span>
+            <button class=" btn-danger" onclick="Logout()">Sair</button>
+          </div>
+        </div>
+          `;
       } else {
-        userInfoDiv.innerHTML = `<button class="background-color: #6CB737 !important;  " onclick="window.location.href='login.html'">Logar</button>`;
+        userInfoDiv.innerHTML = `
+           <div style="display: flex; align-items: flex-end; justify-content: space-between;"> 
+
+          <div class="logo" style="display: flex; align-items: center;">
+            <img src="android/logo to pwa.png">
+          </div>
+
+        <button class="background-color: #6CB737 !important;  " onclick="window.location.href='login.html'">Logar</button>
+          </div>
+          `;
       }
     }
 
@@ -914,10 +943,10 @@
         listarCarrinho(); // Chama a função para atualizar o carrinho
         return;
       }
-      cartContainer.classList.toggle('active'); 
+      cartContainer.classList.toggle('active');
 
-            toggleButton.innerHTML = '<i class="fas fa-times"></i> Fechar Carrinho';
-            toggleButton.style.color = 'red'; 
+      toggleButton.innerHTML = '<i class="fas fa-times"></i> Fechar Carrinho';
+      toggleButton.style.color = 'red';
 
       localStorage.setItem('carrinho', JSON.stringify(carrinho));
       listarCarrinho();
@@ -962,7 +991,7 @@
       localStorage.setItem('carrinho', JSON.stringify(carrinho));
       listarCarrinho();
     }
- 
+
     mostrarLoading()
     exibirUsuario();
     listarMateriais();

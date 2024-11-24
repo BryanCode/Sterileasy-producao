@@ -34,7 +34,7 @@
     }
     body {
       font-family: 'Georama', Arial, sans-serif;
-      padding-top: 1em;
+      padding-top: 1.7em;
       max-width: 600px;
       margin: auto;
       background-color: #052637;
@@ -199,9 +199,58 @@
     .menu-open .content {
       margin-left: 250px;
     }
+
+     /* Botão de voltar fixo no canto esquerdo */
+  .btn-voltar {
+    position: fixed;
+    top: 20px;
+    left: 5px;
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre o ícone e o texto */
+    z-index: 1000;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  /* Ícone do botão */
+  .btn-voltar i {
+    font-size: 1.2rem;
+  }
+
+  /* Hover para o botão */
+  .btn-voltar:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+
+  /* Responsividade */
+  @media screen and (max-width: 768px) {
+    .btn-voltar {
+      top: 15px;
+      left: 5px;
+      font-size: 0.9rem;
+      padding: 8px 15px;
+    }
+
+    .btn-voltar i {
+      font-size: 1rem;
+    }
+  }
   </style>
 </head>
 <body>
+
+  <!-- Botão de Voltar -->
+<a href="javascript:history.back()" class="btn-voltar">
+  <i class="fa fa-arrow-left"></i> 
+</a>
 
 
   <!-- Overlay de Loading -->
