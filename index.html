@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="manifest" href="manifest.json">
 
   <title>SterilEasy - Montar Pedido</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -17,6 +16,7 @@
       max-width: 1200px;
       padding-bottom: 10em !important;
       margin: auto;
+      
       background-color: #052637;
     }
 
@@ -313,14 +313,15 @@
       position: fixed;
       bottom: 0;
       right: 20% !important;
+      border: #218838 3px solid;
       width: 100%;
-      max-width: 400px;
+      max-width: 500px;
       transform: translateY(100%);
       transition: transform 0.3s ease-in-out;
       background-color: #f9f9f9;
       box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
     }
 
     .cart-container.active {
@@ -349,17 +350,8 @@
     .cart-toggle-button:hover {
       background-color: #0056b3;
     }
-  </style>
-</head>
-
-<body>
-
-  <!-- Adicione este código no corpo da sua página -->
-  <div id="loading-overlay">
-    <div class="spinner"></div>
-  </div>
-
-  <style>
+  
+  
     #loading-overlay {
       position: fixed;
       top: 0;
@@ -465,8 +457,12 @@
 
       .cart-container.active {
       transform: translate(20%,-60px);
-    }
+      max-width: 400px;
+      }
 
+      .material-name {
+        font-size: .8em;
+      }
 
       .cart-container {
         bottom: 0;
@@ -500,20 +496,129 @@
         margin: 0;
       }
     }
+      /* Overlay cobrindo toda a tela */
+  #checkout-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  /* Contêiner do Checkout */
+  .checkout-container {
+    background-color: white;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+
+  .checkout-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  /* Tabela de produtos */
+  .checkout-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  .checkout-table th, .checkout-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+
+  .checkout-table th {
+    background-color: #f5f5f5;
+    color: #333;
+  }
+
+  .checkout-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .checkout-footer p {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .checkout-footer button {
+    padding: 10px 20px;
+    background-color: #6DB734;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .checkout-footer button:hover {
+    background-color: #0056b3;
+  }
   </style>
 
+</head>
 
+<body>
+
+  <!-- Checkout Overlay -->
+  <div id="checkout-overlay" style="display: none;">
+    <div class="checkout-container">
+      <h1>Checkout</h1>
+      <table class="checkout-table">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço Unitário</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="checkout-items">
+          <!-- Itens do carrinho serão preenchidos aqui -->
+        </tbody>
+      </table>
+      <div class="checkout-footer">
+        <p id="checkout-total">Total: R$ 0.00</p>
+        <button onclick="fecharCheckout()">Fechar</button>
+        <button onclick="enviarPedido()">Finalizar Pedido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adicione este código no corpo da sua página -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+  </div>
 
   <h1>Faça seu pedido</h1>
 
   <div id="user-info">
-    <!-- Nome do cliente ou botão de login será exibido aqui -->
+  <!-- Nome do cliente ou botão de login será exibido aqui -->
   </div>
 
   <div class="material-list">
     <h2>Itens Disponíveis</h2>
     <ul id="material-list" style=" flex-wrap: wrap; width: 100%;" class="card-container"></ul>
   </div>
+
+
+
   <button id="toggle-cart" class="cart-toggle-button"><i class="fas fa-shopping-cart"></i> Carrinho</button>
 
   <div class="cart-container">
@@ -522,35 +627,143 @@
       <ul id="cart-list"></ul>
       <div class="checkout" style="justify-content: flex-end; gap: 35px; align-items: center;">
         <p class="cart-total" id="cart-total">Total: R$ 0.00</p>
-        <button onclick="enviarPedido()">Finalizar</button>
+        <button onclick="abrirCheckout()">Finalizar</button>
       </div>
+    
     </div>
+  
   </div>
 
-
   <script>
-
+   
     const toggleButton = document.getElementById('toggle-cart');
-    const cartContainer = document.querySelector('.cart-container');
-
     toggleButton.addEventListener('click', () => {
-      cartContainer.classList.toggle('active'); // Alterna a classe que exibe/oculta o carrinho
-    });
+          cartContainer.classList.toggle('active'); // Alterna a classe que exibe/oculta o carrinho
+          if (cartContainer.classList.contains('active')) {
+            toggleButton.innerHTML = '<i class="fas fa-times"></i> Fechar Carrinho';
+            toggleButton.style.backgroundColor = 'red';
+          } else {
+            toggleButton.innerHTML = '<i class="fas fa-shopping-cart"></i> Carrinho';
+            toggleButton.style.backgroundColor = 'green';
+          }
 
+        });
+    const cartContainer = document.querySelector('.cart-container');
     const databaseURL = "https://sterileasy-ca5ed-default-rtdb.firebaseio.com/materiais.json";
     const pedidosURL = "https://sterileasy-ca5ed-default-rtdb.firebaseio.com/pedidos.json";
+    const incrementURL = 'https://sterileasy-ca5ed-default-rtdb.firebaseio.com/pedidos/increment.json'
 
-    // Função para exibir o overlay de loading
+    async function enviarPedido() {
+        fecharCheckout();
+        mostrarLoading()
+        const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        const cliente = JSON.parse(localStorage.getItem('cliente'));
+
+
+        if (!cliente) {
+          window.location.href = 'login.html';
+          esconderLoading() 
+          return;
+        }
+
+        if (carrinho.length === 0) {
+          alert('O carrinho está vazio!');
+          esconderLoading()
+          return;
+        }
+
+        const response = await fetch(incrementURL);
+        const NumPedido = await response.json();
+        const total = carrinho.reduce((acc, item) => acc + item.valor * item.quantidade, 0);
+
+        const pedido = {
+          idPedido: NumPedido,
+          cliente: cliente,
+          status: 'pendente',
+          itens: carrinho,
+          total,
+          data: new Date().toISOString()
+        };
+
+        
+
+        await fetch(pedidosURL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },  
+          body: JSON.stringify(pedido)
+        });
+
+        await fetch(incrementURL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },  
+          body: JSON.stringify( NumPedido + 1 )
+        });
+        
+
+        alert('Pedido enviado com sucesso!');
+        cartContainer.classList.toggle('active');
+        esconderLoading()
+        localStorage.removeItem('carrinho');
+        listarCarrinho();
+        direcionarWhatsapp(NumPedido, cliente);
+      }
+
+    function direcionarWhatsapp(idPedido, cliente) {
+      const numero = '555189580108';
+      const mensagem = `Olá, meu nome é ${cliente.nome},\n acabei de realizar o pedido número #${idPedido}.`;
+
+      window.location.href = 'https://wa.me/' + numero + '?text=' + encodeURIComponent(mensagem);
+
+    }
+
+    function abrirCheckout() {
+
+      const carrinho = JSON.parse(localStorage.getItem('carrinho'));
+      if (!carrinho || carrinho.length === 0) {
+        return;
+      }
+      const checkoutItems = document.getElementById('checkout-items');
+      const checkoutTotal = document.getElementById('checkout-total');
+
+      // Limpa a tabela antes de preencher
+      checkoutItems.innerHTML = '';
+      let total = 0;
+
+      // Preenche a tabela com os itens do carrinho
+      carrinho.forEach(item => {
+        const subtotal = item.valor * item.quantidade;
+        total += subtotal;
+
+        const row = `
+          <tr>
+            <td>${item.nome}</td>
+            <td>${item.quantidade}</td>
+            <td>R$ ${parseFloat(item.valor).toFixed(2)}</td>
+            <td>R$ ${subtotal.toFixed(2)}</td>
+          </tr>
+        `;
+        checkoutItems.innerHTML += row;
+      });
+
+      // Atualiza o total
+      checkoutTotal.textContent = `Total: R$ ${total.toFixed(2)}`;
+
+      // Mostra o overlay
+      document.getElementById('checkout-overlay').style.display = 'flex';
+    }
+
+    function fecharCheckout() {
+      document.getElementById('checkout-overlay').style.display = 'none';
+    }
+
     function mostrarLoading() {
       document.getElementById('loading-overlay').style.display = 'flex';
     }
 
-    // Função para ocultar o overlay de loading
     function esconderLoading() {
       document.getElementById('loading-overlay').style.display = 'none';
     }
 
-    // Função para exibir o nome do cliente ou botão de login
     function exibirUsuario() {
       const cliente = JSON.parse(localStorage.getItem('cliente'));
 
@@ -585,26 +798,26 @@
           const li = document.createElement('li');
           li.classList.add('card');
           li.innerHTML = `
-      <div class="card-material" style="display: flex; align-items: center; justify-content: center;">
-        <div class="card-image">
-          <img src="assets/dentista.png" alt="${material.nome}" id="myImage">
-        </div>
-        <div class="card-details">
-          <h3>${material.nome}</h3>
-          <h5>${material.descricao || ''}</h5>
-          <p class="price">R$ ${material.valor}</p>
-          <div class="quantity-control">
-            <p>Quantidade:</p>
-            <button style="font-size: 2.3em !important; transform: translateY(-3px);" class="quantity-button" onclick="decrementarQuantidade('${id}')">-</button>
-            <input style="display:flex; align-items: center; justify-content: center; transform: translateX(10px);" type="number" id="quantidade-${id}" value="1" min="1" max="100">
-            <button class="quantity-button" onclick="incrementarQuantidade('${id}')">+</button>
-          </div>
-          <button class="add-to-cart" onclick="adicionarAoCarrinho('${id}', '${encodeURIComponent(JSON.stringify(material))}')">
-            <i class="fas fa-shopping-cart"></i> Adicionar ao Pedido
-          </button>
-        </div>
-      </div>
-    `;
+                        <div class="card-material" style="display: flex; align-items: center; justify-content: center;">
+                          <div class="card-image">
+                            <img src="assets/dentista.png" alt="${material.nome}" id="myImage">
+                          </div>
+                          <div class="card-details">
+                            <h3>${material.nome}</h3>
+                            <h5>${material.descricao || ''}</h5>
+                            <p class="price">R$ ${material.valor}</p>
+                            <div class="quantity-control">
+                              <p>Quantidade:</p>
+                              <button style="font-size: 2.3em !important; transform: translateY(-3px);" class="quantity-button" onclick="decrementarQuantidade('${id}')">-</button>
+                              <input style="display:flex; align-items: center; justify-content: center; transform: translateX(10px);" type="number" id="quantidade-${id}" value="1" min="1" max="100">
+                              <button class="quantity-button" onclick="incrementarQuantidade('${id}')">+</button>
+                            </div>
+                            <button class="add-to-cart" onclick="adicionarAoCarrinho('${id}', '${encodeURIComponent(JSON.stringify(material))}')">
+                              <i class="fas fa-shopping-cart"></i> Adicionar ao Pedido
+                            </button>
+                          </div>
+                        </div>
+                      `;
           materiaisLista.appendChild(li);
         });
       }
@@ -671,7 +884,7 @@
 
           li.innerHTML = `
             
-              <span style="display: flex; align-items: center;justify-content: space-between;">${item.nome} (x${item.quantidade})</span>
+              <span class="material-name" style="display: flex; align-items: center;justify-content: space-between;">${item.nome} (x${item.quantidade})</span>
               <div style="display: flex; gap: 10px; align-items: center;">
                 <span>R$ ${(item.valor * item.quantidade).toFixed(2)}</span>
                 <button style="background-color:red;" onclick="removerDoCarrinho('${item.id}')"><i class="fas fa-trash"></i></button>
@@ -699,43 +912,7 @@
       localStorage.setItem('carrinho', JSON.stringify(carrinho));
       listarCarrinho();
     }
-
-    async function enviarPedido() {
-      mostrarLoading()
-      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-      const cliente = JSON.parse(localStorage.getItem('cliente'));
-
-      if (!cliente) {
-        window.location.href = 'login.html';
-        return;
-      }
-
-      if (carrinho.length === 0) {
-        alert('O carrinho está vazio!');
-        return;
-      }
-
-      const total = carrinho.reduce((acc, item) => acc + item.valor * item.quantidade, 0);
-      const pedido = {
-        cliente: cliente,
-        status: 'pendente',
-        itens: carrinho,
-        total,
-        data: new Date().toISOString()
-      };
-
-      await fetch(pedidosURL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(pedido)
-      });
-
-      alert('Pedido enviado com sucesso!');
-      esconderLoading()
-      localStorage.removeItem('carrinho');
-      listarCarrinho();
-    }
-
+ 
     mostrarLoading()
     exibirUsuario();
     listarMateriais();
