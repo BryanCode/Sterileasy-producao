@@ -1,0 +1,39 @@
+  /* Menu de navegação inferior */
+  .bottom-nav {
+    position: fixed;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    background-color: #052637;
+    display: flex !important;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 3px solid #6DB734;
+    z-index: 1000;
+  }
+
+  /* Itens do menu */
+  .nav-item {
+    text-decoration: none;
+    color: white;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1; /* Distribui igualmente o espaço entre os itens */
+    transition: color 0.3s;
+  }
+
+  /* Ícones do menu */
+  .nav-item i {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
+
+  /* Hover e Ativo */
+  .nav-item:hover,
+  .nav-item:active {
+    color: #6DB734;
+  }
+

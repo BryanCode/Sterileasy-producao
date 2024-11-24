@@ -9,7 +9,7 @@
   <style>
       body {
       font-family: 'Georama', Arial, sans-serif;
-      padding-top: 1em;
+      padding-top: 5em;
       max-width: 600px;
       margin: auto;
       background-color: #052637;
@@ -31,6 +31,7 @@
     .logo img {
       width: 80%;
       height: auto;
+      margin-bottom: 2em;
     }
     .recovery-form, .reset-password-form {
       background-color: white;
@@ -87,6 +88,7 @@
   <!-- Formulário para recuperar conta -->
   <div class="recovery-form" id="email-form">
     <h1>Recuperar Conta</h1>
+    <h5>Digite seu e-mail</h5>
     <input type="email" id="email" placeholder="Digite seu e-mail" required>
     <button onclick="verificarEmail()">Enviar</button>
     <div class="message" id="email-message"></div>

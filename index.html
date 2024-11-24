@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="manifest.json">
-
+  <link rel="stylesheet" href="menu-style.css">
   <title>SterilEasy - Montar Pedido</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Georama:wght@400;600&display=swap" rel="stylesheet">
@@ -17,7 +17,8 @@
       max-width: 1200px;
       padding-bottom: 10em !important;
       margin: auto;
-      
+      touch-action: manipulation;
+
       background-color: #052637;
     }
 
@@ -138,7 +139,7 @@
     .card img {
 
       margin: 0 auto;
-      width: 50px;
+      width: 50px !important;
       height: auto;
       margin-bottom: 10px;
     }
@@ -296,7 +297,6 @@
       list-style: none;
       padding: 0;
       margin: 10px 0;
-      max-height: 150px;
       overflow-y: auto;
     }
 
@@ -311,6 +311,7 @@
 
 
     .cart-container {
+      max-height: fit-content !important;
       position: fixed;
       bottom: 0;
       right: 20% !important;
@@ -456,6 +457,13 @@
         font-size: .9em;
       }
 
+       h3 {
+        font-size: 1.1em !important;  
+       }
+        h5{
+        font-size: .9em !important;
+      }
+
       .cart-container.active {
       transform: translate(20%,-60px);
       max-width: 400px;
@@ -469,7 +477,9 @@
         bottom: 0;
         width: 100%;
         max-width: 400px;
-        transform: translateY(100%);
+        
+
+        transform: translate(20% ,100%);
         transition: transform 0.3s ease-in-out;
         background-color: #f9f9f9;
         border-top-left-radius: 10px;
@@ -495,6 +505,8 @@
 
       .card-image {
         margin: 0;
+        display: flex;
+        justify-content: center;
       }
     }
       /* Overlay cobrindo toda a tela */
@@ -547,6 +559,7 @@
 
   .checkout-footer {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
   }
@@ -573,9 +586,28 @@
   }
   </style>
 
+
 </head>
 
 <body>
+
+  <!-- Menu de Navegação Inferior -->
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item" style="color: #218838;">
+    <i class="fa fa-store" ></i>
+    <span>Loja</span>
+  </a>
+  <a href="#" class="nav-item" onclick="abrirPedidos()">
+    <i class="fa fa-clipboard-list"></i>
+    <span>Pedidos</span>
+  </a>
+  <a href="#" class="nav-item" id="toggle-cart">
+    <i class="fa fa-shopping-cart"></i>
+    <span>Carrinho</span>
+  </a>
+
+</nav>
+
 
   <!-- Checkout Overlay -->
   <div id="checkout-overlay" style="display: none;">
@@ -585,8 +617,7 @@
         <thead>
           <tr>
             <th>Produto</th>
-            <th>Quantidade</th>
-            <th>Preço Unitário</th>
+            <th>Qtd</th>
             <th>Total</th>
           </tr>
         </thead>
@@ -596,8 +627,10 @@
       </table>
       <div class="checkout-footer">
         <p id="checkout-total">Total: R$ 0.00</p>
+        <div>
         <button onclick="fecharCheckout()">Fechar</button>
-        <button onclick="enviarPedido()">Finalizar Pedido</button>
+        <button onclick="enviarPedido()">Finalizar</button>
+      </div>
       </div>
     </div>
   </div>
@@ -606,12 +639,13 @@
   <div id="loading-overlay">
     <div class="spinner"></div>
   </div>
+  <div id="user-info">
+    <!-- Nome do cliente ou botão de login será exibido aqui -->
+    </div>
 
   <h1>Faça seu pedido</h1>
 
-  <div id="user-info">
-  <!-- Nome do cliente ou botão de login será exibido aqui -->
-  </div>
+
 
   <div class="material-list">
     <h2>Itens Disponíveis</h2>
@@ -620,7 +654,6 @@
 
 
 
-  <button id="toggle-cart" class="cart-toggle-button"><i class="fas fa-shopping-cart"></i> Carrinho</button>
 
   <div class="cart-container">
 
@@ -636,16 +669,31 @@
   </div>
 
   <script>
+
+    function abrirPedidos() {
+      alert('Funcionalidade em desenvolvimento!');
+
+    }
+
+    let lastTouchTime = 0;
+
+    document.addEventListener('touchstart', function (event) {
+      const currentTime = new Date().getTime();
+      if (currentTime - lastTouchTime < 300) {
+        event.preventDefault(); // Impede o zoom por toque duplo
+      }
+      lastTouchTime = currentTime;
+    });
    
     const toggleButton = document.getElementById('toggle-cart');
     toggleButton.addEventListener('click', () => {
           cartContainer.classList.toggle('active'); // Alterna a classe que exibe/oculta o carrinho
           if (cartContainer.classList.contains('active')) {
             toggleButton.innerHTML = '<i class="fas fa-times"></i> Fechar Carrinho';
-            toggleButton.style.backgroundColor = 'red';
+            toggleButton.style.color = 'red';
           } else {
             toggleButton.innerHTML = '<i class="fas fa-shopping-cart"></i> Carrinho';
-            toggleButton.style.backgroundColor = 'green';
+            toggleButton.style.color = 'white';
           }
 
         });
@@ -739,7 +787,6 @@
           <tr>
             <td>${item.nome}</td>
             <td>${item.quantidade}</td>
-            <td>R$ ${parseFloat(item.valor).toFixed(2)}</td>
             <td>R$ ${subtotal.toFixed(2)}</td>
           </tr>
         `;
@@ -810,7 +857,7 @@
                             <div class="quantity-control">
                               <p>Quantidade:</p>
                               <button style="font-size: 2.3em !important; transform: translateY(-3px);" class="quantity-button" onclick="decrementarQuantidade('${id}')">-</button>
-                              <input style="display:flex; align-items: center; justify-content: center; transform: translateX(10px);" type="number" id="quantidade-${id}" value="1" min="1" max="100">
+                              <input style="display:flex; align-items: center; justify-content: center; transform: " type="number" id="quantidade-${id}" value="1" min="1" max="100">
                               <button class="quantity-button" onclick="incrementarQuantidade('${id}')">+</button>
                             </div>
                             <button class="add-to-cart" onclick="adicionarAoCarrinho('${id}', '${encodeURIComponent(JSON.stringify(material))}')">
@@ -836,7 +883,6 @@
         listarCarrinho(); // Chama a função para atualizar o carrinho
         return;
       }
-      cartContainer.classList.toggle('active'); // Alterna a classe que exibe/oculta o carrinho
     }
 
     function decrementarQuantidade(id) {
@@ -848,7 +894,6 @@
         listarCarrinho(); // Chama a função para atualizar o carrinho
         return;
       }
-      cartContainer.classList.toggle('active'); // Alterna a classe que exibe/oculta o carrinho
     }
 
     function adicionarAoCarrinho(id, materialString) {
@@ -869,7 +914,11 @@
         listarCarrinho(); // Chama a função para atualizar o carrinho
         return;
       }
-      cartContainer.classList.toggle('active'); // Alterna a classe que exibe/oculta o carrinho
+      cartContainer.classList.toggle('active'); 
+
+            toggleButton.innerHTML = '<i class="fas fa-times"></i> Fechar Carrinho';
+            toggleButton.style.backgroundColor = 'red';
+
       localStorage.setItem('carrinho', JSON.stringify(carrinho));
       listarCarrinho();
     }
